@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/presets/ERC721PresetMinterPauserAutoId.sol";
 
 contract FOODNFT is ERC721PresetMinterPauserAutoId {
-    mapping(uint256 => uint256) powers;
+    mapping(uint256 => uint256) public powers;
 
     constructor()
         ERC721PresetMinterPauserAutoId("FOODNFT", "NFT", "www.abc.com")
