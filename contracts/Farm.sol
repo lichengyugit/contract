@@ -14,6 +14,7 @@ contract Farm is StakingRewards, Ownable, ERC721Holder {
     mapping(uint256 => address) public src;
     mapping(uint256 => address) public dst;
     mapping(address => uint256) public __balances;
+    mapping(address => string) public pool_name;
 
     IFarmPower farmpower;
     constructor(
@@ -23,6 +24,15 @@ contract Farm is StakingRewards, Ownable, ERC721Holder {
     ) StakingRewards(st, rt) {
         farmpower = IFarmPower(fp);
     }
+
+    function set_pool_name(address pool, string memory name) public {
+        pool_name[pool] = name;
+    }
+
+    function get_pool_name(address pool) public view returns(string memory)  {
+        return pool_name[pool];
+    }
+ 
     function stake(uint256 id, address pool) public updateReward(pool) {
         uint256 power = IFOODNFT(address(stakingToken)).powers(id);
         require(power > 0, "Power should be greater than 0");

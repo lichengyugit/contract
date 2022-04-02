@@ -1,4 +1,5 @@
 const { expect } = require("chai");
+const { Signer } = require("ethers");
 const { ethers } = require("hardhat");
 
 describe("Farm", function () {
@@ -85,6 +86,14 @@ describe("Farm", function () {
 
     //await farm.connect(signers[1]).stake(0, signers[1].address);
 
+    await farm.set_pool_name(signers[0].address,"123");
+  
+    var name1 = await farm.get_pool_name(signers[0].address);
+    console.log(`pool name : ` + name1);
+    var name2 = await farm.get_pool_name(signers[1].address);
+    console.log(`pool name : ` + name2);
+    var name3 = await farm.get_pool_name(null);
+    console.log(`pool name : ` + name3);
 
   })
 });
