@@ -17,6 +17,7 @@ contract Farm is StakingRewards, Ownable, ERC721Holder {
     mapping(address => string) public pool_name;
 
     IFarmPower farmpower;
+
     constructor(
         address st,
         address rt,
@@ -33,20 +34,11 @@ contract Farm is StakingRewards, Ownable, ERC721Holder {
     function get_pool_name(address pool) public view returns(string memory)  {
         return pool_name[pool];
     }
- 
+
     function stake(uint256 id, address pool) public updateReward(pool) {
         uint256 power = IFOODNFT(address(stakingToken)).powers(id);
         require(power > 0, "Power should be greater than 0");
         __balances[pool] += power;
-        // 如果说power=5e18；第一次加入该矿池
-        // farm.calculate = 1.5e18*5 = delte
-        //__balances= 5e
-        //__balances=7.5e
-
-        //别人二次加入该矿池，加1e
-        //__balances=6e
-
-        //_balances =9.6e
         uint256 delta = farmpower.calculate(__balances[pool]) - _balances[pool];
         _totalSupply += delta;
         _balances[pool] += delta;
