@@ -26,6 +26,7 @@ contract Farm is StakingRewards, Ownable, ERC721Holder {
     }
 
     function set_pool_name(address pool, string memory name) public {
+        require(pool == msg.sender,"xxxxxxxx");
         pool_name[pool] = name;
     }
 
