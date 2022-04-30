@@ -16,8 +16,4 @@ describe("Greeter", function () {
 
     expect(await greeter.greet()).to.equal("Hola, mundo!");
   });
-  it("t1", async function () {
-  });
-  it("t2", async function () {
-  });
 });
