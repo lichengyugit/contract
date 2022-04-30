@@ -49,16 +49,16 @@ contract TimeLock is Ownable {
         require(user.releasedAmount < user.totalAmount, "your token has all released");
 
         if (getCurrentTime() - user.createdAt > lockTime)  {
-                uint256 current = getCurrentTime();
-                if (current - user.createdAt - lockTime > releaseTime) {
-                    current = user.createdAt + lockTime + releaseTime;
-                }
+            uint256 current = getCurrentTime();
+            if (current - user.createdAt - lockTime > releaseTime) {
+                current = user.createdAt + lockTime + releaseTime;
+            }
 
-                uint256 amount;
-                amount = (user.totalAmount * (current - user.createdAt - lockTime)) / releaseTime  - user.releasedAmount;
-                SafeERC20.safeTransferFrom(token, holder, msg.sender, amount);
-                user.releasedAmount += amount;
-                users[msg.sender] = user;
+            uint256 amount;
+            amount = (user.totalAmount * (current - user.createdAt - lockTime)) / releaseTime  - user.releasedAmount;
+            SafeERC20.safeTransferFrom(token, holder, msg.sender, amount);
+            user.releasedAmount += amount;
+            users[msg.sender] = user;
         }
 
         return user;
