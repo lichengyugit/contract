@@ -100,11 +100,11 @@ describe("Farm", function () {
 
     await farm.set_pool_name(signers[0].address,"123");
   
-    var name1 = await farm.get_pool_name(signers[0].address);
+    var name1 = await farm.pool_names(signers[0].address);
     console.log(`pool name : ` + name1);
-    var name2 = await farm.get_pool_name(signers[1].address);
+    var name2 = await farm.pool_names(signers[1].address);
     console.log(`pool name : ` + name2);
-    var name3 = await farm.get_pool_name(null);
+    var name3 = await farm.pool_names("0x0000000000000000000000000000000000000000");
     console.log(`pool name : ` + name3);
 
   })
