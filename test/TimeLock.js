@@ -17,8 +17,7 @@ describe("TimeLock", function () {
 
     await cat.connect(signers[0]).mint(timeLock.address, 100);
     expect(await cat.balanceOf(timeLock.address)).to.equal(100);
-  
-    await cat.connect(signers[0]).approve(timeLock.address, 100);
+
     await hre.network.provider.send("evm_setAutomine", [false]);
 
     await hre.network.provider.send("evm_setNextBlockTimestamp", [ts + 30]);
