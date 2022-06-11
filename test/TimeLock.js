@@ -29,7 +29,7 @@ describe("TimeLock", function () {
     expect(await cat.balanceOf(signers[1].address)).to.equal(0);
     expect(await cat.balanceOf(timeLock.address)).to.equal(100);
 
-    console.log("token in relese time linear released 80");
+    console.log("token in release time linear released 80");
     await hre.network.provider.send("evm_setNextBlockTimestamp", [ts + 600 + 80]);
     await hre.network.provider.send("evm_mine");
     await timeLock.connect(signers[1])["release(address)"](cat.address);
@@ -38,7 +38,7 @@ describe("TimeLock", function () {
     expect(await cat.balanceOf(signers[1].address)).to.equal(80);
     expect(await cat.balanceOf(timeLock.address)).to.equal(20);
 
-    console.log("token in relese time linear released 100");
+    console.log("token in release time linear released 100");
     await hre.network.provider.send("evm_setNextBlockTimestamp", [ts + 600 + 100]);
     await hre.network.provider.send("evm_mine");
     await timeLock.connect(signers[1])["release(address)"](cat.address);
@@ -47,7 +47,7 @@ describe("TimeLock", function () {
     expect(await cat.balanceOf(signers[1].address)).to.equal(100);
     expect(await cat.balanceOf(timeLock.address)).to.equal(0);
 
-    console.log("token after relese time all token released")
+    console.log("token after release time all token released")
     await hre.network.provider.send("evm_setNextBlockTimestamp", [ts + 600 + 100 + 200]);
     await hre.network.provider.send("evm_mine");
     await timeLock.connect(signers[1])["release(address)"](cat.address);
